@@ -1,0 +1,10 @@
+services:
+  lulu-chan-bot:
+    build:
+      context: ./docker
+    volumes:
+      - ./:/srv/app:rw,cached
+    env_file:
+      - .env
+    labels:
+      - word.enable=true

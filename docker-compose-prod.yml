@@ -1,0 +1,5 @@
+services:
+  lulu-chan-bot:
+    command: "node app.js"
+    environment:
+      - NODE_ENV=production

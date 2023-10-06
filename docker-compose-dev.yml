@@ -1,0 +1,5 @@
+services:
+  lulu-chan-bot:
+    command: "npm run dev"
+    environment:
+      - NODE_ENV=development
