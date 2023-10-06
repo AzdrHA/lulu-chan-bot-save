@@ -4,9 +4,9 @@ import {
   type BaseMessageOptions,
   ChatInputCommandInteraction,
   type Interaction,
-  Message,
-  type MessagePayload
+  Message
 } from 'discord.js';
+import { type ECommandCategory } from '../enum/ECommandCategory';
 
 /**
  * @abstract
@@ -21,6 +21,7 @@ export default abstract class AbstractCommand extends AbstractAction {
   public abstract alias: string[];
   public abstract description: string;
   public abstract slash: boolean;
+  public abstract category: ECommandCategory;
 
   /**
    * @constructor
@@ -46,7 +47,7 @@ export default abstract class AbstractCommand extends AbstractAction {
 
   /**
    * @public
-   * @param {string | MessagePayload} options
+   * @param {BaseMessageOptions} options
    * @returns {Promise<Message>}
    */
   public async reply(options: BaseMessageOptions): Promise<any> {

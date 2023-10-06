@@ -101,29 +101,35 @@ export default class LoadFileService {
   /**
    * Load a command
    * @param {string} fileName
-   * @param {AbstractCommand} event
+   * @param {AbstractCommand} command
    * @param {() => AbstractCommand} Action
    * @private
    */
   private async loadCommand(
     fileName: string,
-    event: AbstractCommand,
+    command: AbstractCommand,
     Action: () => AbstractCommand
   ): Promise<any> {
-    event.alias.forEach((name) => {
+    command.alias.forEach((name) => {
       if (this.client.commands.has(name)) {
         throw new AppException(
           util.format('The command %s is already registered', fileName)
         );
       }
 
-      if (event.slash) {
+      if (command.slash) {
         this.client.application_commands.push(
           new SharedNameAndDescription()
             .setName(name)
-            .setDescription(event.description)
+            .setDescription(command.description)
         );
       }
+
+      const hasCommand = this.client.categories.get(command.category) ?? [];
+      this.client.categories.set(
+        command.category,
+        hasCommand.concat([command.alias[0]])
+      );
 
       this.client.commands.set(name, Action);
     });

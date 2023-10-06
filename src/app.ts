@@ -25,25 +25,25 @@ void (async () => {
     await loadFileService.searchInFolder(util.format('%s/%s', APP_DIR, dir));
   }
 
-  // await client.login(process.env.DISCORD_TOKEN);
+  await client.login(process.env.DISCORD_TOKEN);
 
-  const rest = new REST({ version: '10' }).setToken(
-    process.env.DISCORD_TOKEN as string
-  );
-
-  try {
-    console.log('Started refreshing application (/) commands.');
-
-    await rest.put(Routes.applicationCommands('701112722284216330'), {
-      body: client.application_commands
-    });
-
-    console.log('Successfully reloaded application (/) commands.');
-
-    await client.login(process.env.DISCORD_TOKEN);
-  } catch (error) {
-    console.error(error);
-  }
+  // const rest = new REST({ version: '10' }).setToken(
+  //   process.env.DISCORD_TOKEN as string
+  // );
+  //
+  // try {
+  //   console.log('Started refreshing application (/) commands.');
+  //
+  //   await rest.put(Routes.applicationCommands('701112722284216330'), {
+  //     body: client.application_commands
+  //   });
+  //
+  //   console.log('Successfully reloaded application (/) commands.');
+  //
+  //   await client.login(process.env.DISCORD_TOKEN);
+  // } catch (error) {
+  //   console.error(error);
+  // }
 })();
 
 process.on('unhandledRejection', (reason: Error, promise) => {

@@ -1,6 +1,7 @@
 import { Client as BaseClient, Collection } from 'discord.js';
 import { type IClientOptions } from './interface/IClientOptions';
 import { type SharedNameAndDescription } from '@discordjs/builders';
+import { type ECommandCategory } from './enum/ECommandCategory';
 
 /**
  * @class Client
@@ -11,6 +12,7 @@ export default class Client<Ready extends boolean> extends BaseClient<Ready> {
   public commands: Collection<any, any>;
   public application_commands: SharedNameAndDescription[];
   public events: Collection<any, any>;
+  public categories: Collection<ECommandCategory, string[]>;
 
   /**
    * @constructor
@@ -22,5 +24,6 @@ export default class Client<Ready extends boolean> extends BaseClient<Ready> {
     this.commands = new Collection();
     this.application_commands = [];
     this.events = new Collection();
+    this.categories = new Collection();
   }
 }
